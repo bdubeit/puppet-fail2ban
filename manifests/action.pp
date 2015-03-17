@@ -130,7 +130,10 @@ define fail2ban::action (
 
   $manage_file_content = $actiontemplate ? {
     ''        => undef,
-    default   => template($actiontemplate),
+    default   => $actionsource ? {
+      ''        => template($actiontemplate),
+      default   => undef,
+    }
   }
 
   file { "${real_actionname}.local":
