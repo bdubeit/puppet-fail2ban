@@ -498,7 +498,7 @@ class fail2ban (
   }
 
   # The whole fail2ban.configuration directory can be recursively overriden
-  if $fail2ban::source_dir {
+  if $fail2ban::source_dir != undef and $fail2ban::source_dir != '' {
     file { 'fail2ban.dir':
       ensure  => directory,
       path    => $fail2ban::config_dir,
